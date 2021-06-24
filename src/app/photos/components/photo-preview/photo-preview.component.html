@@ -1,0 +1,25 @@
+<div *ngIf="!photo; else mainContent" class="row">
+  <img [src]="'assets/loader.gif'" alt="Loader gif">
+</div>
+
+<ng-template #mainContent>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <img [src]="'http://localhost:3000/' + photo.imagePath" [alt]="photo.title" class="image-fluid" />
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card">
+        <form (submit)="updatePhoto(titleInput.value, descriptionTA.value)" class="card-body">
+          <input type="text" #titleInput [value]="photo.title" class="form-control" placeholder="Photo's title">
+          <textarea rows="2" #descriptionTA [value]="photo.description" class="form-control" placeholder="Photo's description"></textarea>
+          <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <button (click)="deletePhoto(photo._id)" class="btn btn-danger">Delete</button>
+</ng-template>
